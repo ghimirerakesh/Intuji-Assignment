@@ -7,8 +7,10 @@ session_start();
 $client = new Google_Client();
 
 $client->setAuthConfig('credentials.json');
+$protocol = isset($_SERVER['HTTPS']) &&  $_SERVER['HTTPS'] === 'on' ? 'https://' : 'http://';
 
-$client->setRedirectUri('https://intuji-test.com/oauthcallback.php');
+$base_url = $protocol . $_SERVER['HTTP_HOST'] . '/oauthcallback.php';
+$client->setRedirectUri($base_url);
 
 $client->addScope(Google_Service_Calendar::CALENDAR);
 if (!isset($_SESSION['access_token']) && !isset($_GET['code'])) {

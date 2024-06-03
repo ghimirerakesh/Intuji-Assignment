@@ -63,7 +63,7 @@ body {
             <label for="title">End DateTime:</label>
             <input type="datetime-local" class="form-control" name="end" placeholder="End Date" required="" autofocus="" />
 
-            <input class="btn"  type="submit" value="submit">Create Event</button>
+            <input class="btn"  type="submit" value="Save"/>
         </form>
     </div>
 </body>

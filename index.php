@@ -1,5 +1,7 @@
 <?php
 include 'functions/init.php';
+
+
 $service = new Google_Service_Calendar($client);
 
 
@@ -52,6 +54,7 @@ $events = $results->getItems();
             <?php
             if ($_SESSION["error_message"] != '') {
                 echo "<div class='alert'>" . $_SESSION["error_message"] . "</div>";
+                $_SESSION["error_message"] = '';
             }
             ?>
             <h1>Upcoming Events</h1>
@@ -66,19 +69,24 @@ $events = $results->getItems();
             </tr>
 
             <?php
-            if (!empty($events)) {
-                for ($i = 0; $i <= count($events); $i++) {
-                    $summary = $events[$i]->getSummary() . '(' . $events[$i]->start->dateTime . ')';
-                    $key = $i + 1;
-                    echo "<tr>
-                    <td>$key</td>
-                    <td>$summary</td>
-                    <td><a href=delete.php?eventId=" . $events[$i]->getId() . " >Delete</a></td>
-                    </tr> ";
+            try {
+                if (!empty($events) && count($events) > 0) {
+                    for ($i = 0; $i < count($events); $i++) {
+                        $summary = $events[$i]->getSummary() . '(' . $events[$i]->start->dateTime . ')';
+                        $key = $i + 1;
+                        echo "<tr>
+                        <td>$key</td>
+                        <td>$summary</td>
+                        <td><a href=delete.php?eventId=" . $events[$i]->getId() . " >Delete</a></td>
+                        </tr> ";
+                    }
+                } else {
+                    echo "<tr><td colspan='3' style='text-align:center;'>No upcoming events found, Please Create One.</td></tr>";
                 }
-            } else {
-                echo "<tr><td colspan='3' style='text-align:center;'>No upcoming events found, Please Create One.</td></tr>";
+            }catch(Throwable $e) {
+                $_SESSION['error_message'] = 'Something went wrong,please try again';
             }
+            
             ?>
         </table>
     </div>

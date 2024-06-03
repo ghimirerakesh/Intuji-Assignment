@@ -52,7 +52,7 @@ $events = $results->getItems();
     <div class="wrapper">
         <div style="margin-bottom: 20px;">
             <?php
-            if ($_SESSION["error_message"] != '') {
+            if (isset($_SESSION['error_message']) && $_SESSION["error_message"] != '') {
                 echo "<div class='alert'>" . $_SESSION["error_message"] . "</div>";
                 $_SESSION["error_message"] = '';
             }

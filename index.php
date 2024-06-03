@@ -52,6 +52,7 @@ if (empty($events)) {
         <div style="margin-bottom: 20px;">
             <h1>Upcoming Events</h1>
             <a href="create.php" class="create_btn">Create Event</a>
+            <a href="revoke.php" class="create_btn">Revoke Access</a>
         </div>
         <table border="1" class="tbl">
             <tr>
@@ -59,16 +60,20 @@ if (empty($events)) {
                 <th>Event</th>
                 <th>Actions</th>
             </tr>
+
             <?php
-            foreach ($events as $key => $event)
+                for($i=0;$i<=count($events);$i++)
+                {
+                    $summary = $events[$i]->getSummary().'('.$events[$i]->start->dateTime. ')';
+                    $key = $i+1;
+                    echo "<tr>
+                    <td>$key</td>
+                    <td>$summary</td>
+                    <td><a href=delete.php?eventId=".$events[$i]->getId()." >Delete</a></td>
+                    </tr> " ;
+                }
             ?>
-            <tr>
-                <td><?php echo $key + 1; ?></td>
-                <td><?php echo $event->getSummary() .  '(' . $event->start->dateTime . ')'  ?></td>
-                <td><a href="delete.php?eventId=<?php echo $event->getId(); ?>" >Delete</a></td>
-            </tr>
         </table>
     </div>
 </body>
-
 </html>

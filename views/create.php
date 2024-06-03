@@ -52,7 +52,7 @@ body {
 </style>
 <body>
     <div class="wrapper">
-        <form class="form-signin" action="submit.php" method="POST">
+        <form class="form-signin" action="submit" method="POST">
             <h2 class="form-signin-heading">Create Events</h2>
             <label for="title">Event Title:</label>
             <input type="text" class="form-control" name="summary" placeholder="Event Title" required="" autofocus="" />

@@ -16,6 +16,10 @@
             require __DIR__ . $viewDir . 'revoke.php';
             break;
 
+        case '/submit':
+            require __DIR__ . $viewDir . 'submit.php';
+            break;
+
         case '/delete':
             require __DIR__ . $viewDir . 'delete.php';
             break;

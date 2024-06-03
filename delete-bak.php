@@ -9,7 +9,7 @@ $calendarId = 'primary';
 
 $service->events->delete($calendarId, $eventId);
 
-header('Location: index.php');
+header('Location: /');
 exit();
 
 

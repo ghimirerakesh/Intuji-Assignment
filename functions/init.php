@@ -23,7 +23,7 @@ if (!isset($_SESSION['access_token']) && !isset($_GET['code'])) {
 } elseif (isset($_SESSION['access_token']) && isset($_GET['logout'])) {
     unset($_SESSION['access_token']);
     session_destroy();
-    header('Location: index.php');
+    header('Location: /');
     exit();
 }
 $client->setAccessToken($_SESSION['access_token']);

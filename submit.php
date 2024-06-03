@@ -23,9 +23,9 @@ try{
   
   $calendarId = 'primary';
   $event = $service->events->insert($calendarId, $event);
-  header('Location: index.php');
+  header('Location: /');
 }catch(Throwable $e) {
   $_SESSION['error_message'] = 'Something went wrong,please try again';
-  header('Location: index.php');
+  header('Location: /');
 }
 ?>

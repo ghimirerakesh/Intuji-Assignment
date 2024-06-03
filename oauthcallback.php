@@ -18,7 +18,7 @@ if (!isset($_GET['code'])) {
 } else { 
     $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
     $_SESSION['access_token'] = $token;
-    header('Location: index.php');
+    header('Location: /');
     exit();
 }
 ?>

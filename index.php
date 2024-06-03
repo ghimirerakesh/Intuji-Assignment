@@ -17,9 +17,7 @@ $results = $service->events->listEvents($calendarId, $optParams);
 $events = $results->getItems();
 
 
-if (empty($events)) {
-    echo "No upcoming events found.";
-}
+
 
 ?>
 
@@ -35,21 +33,27 @@ if (empty($events)) {
         margin-bottom: 80px;
         margin-left: 20%;
     }
-    .tbl{
-        width:700px;
+
+    .tbl {
+        width: 700px;
     }
-    .create_btn{
+
+    .create_btn {
         cursor: pointer;
         border: 1px solid black;
         text-decoration: none;
         padding: 5px;
     }
-
 </style>
 
 <body>
     <div class="wrapper">
         <div style="margin-bottom: 20px;">
+            <?php
+            if ($_SESSION["error_message"] != '') {
+                echo "<div class='alert'>" . $_SESSION["error_message"] . "</div>";
+            }
+            ?>
             <h1>Upcoming Events</h1>
             <a href="create.php" class="create_btn">Create Event</a>
             <a href="revoke.php" class="create_btn">Revoke Access</a>
@@ -62,18 +66,22 @@ if (empty($events)) {
             </tr>
 
             <?php
-                for($i=0;$i<=count($events);$i++)
-                {
-                    $summary = $events[$i]->getSummary().'('.$events[$i]->start->dateTime. ')';
-                    $key = $i+1;
+            if (!empty($events)) {
+                for ($i = 0; $i <= count($events); $i++) {
+                    $summary = $events[$i]->getSummary() . '(' . $events[$i]->start->dateTime . ')';
+                    $key = $i + 1;
                     echo "<tr>
                     <td>$key</td>
                     <td>$summary</td>
-                    <td><a href=delete.php?eventId=".$events[$i]->getId()." >Delete</a></td>
-                    </tr> " ;
+                    <td><a href=delete.php?eventId=" . $events[$i]->getId() . " >Delete</a></td>
+                    </tr> ";
                 }
+            } else {
+                echo "<tr><td colspan='3' style='text-align:center;'>No upcoming events found, Please Create One.</td></tr>";
+            }
             ?>
         </table>
     </div>
 </body>
+
 </html>
